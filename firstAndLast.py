@@ -8,3 +8,5 @@ def first_and_last(value):
     }
 
     return position
+
+print(first_and_last("djhanjnhqwjh"))

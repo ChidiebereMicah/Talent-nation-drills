@@ -5,4 +5,7 @@ using *args without explicitly declaring each topping name as a separate paramet
 """
 
 def coffee_topping(*args):
-    return f"The following topping flavors should accompany your new coffee machine: {arg for arg in args}"
+    toppings = ", ".join(args[:-1])
+    return f"The following topping flavors should accompany your new coffee machine: {toppings} and {args[-1]}."
+
+print(coffee_topping("chocolate", "vanilla", "fenugreek", "sprinkles"))

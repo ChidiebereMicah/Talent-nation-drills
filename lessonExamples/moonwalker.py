@@ -37,7 +37,13 @@ michael = numbers[len(numbers)-2::-2]
 # for num in michael:
     # if num%2 == 0:
         # count += 1 
-
+"or"
 jackson = sum(num % 2 == 0 for num in michael) #sum adds the boolean values to get the even num count
 print(jackson)
 
+"or"
+michael_jackson = [num for num in numbers[len(numbers)-2::-2] if num % 2 == 0]
+print(len(michael_jackson))
+
+"or"
+print(sum(num % 2 == 0 for num in numbers[len(numbers)-2::-2]))

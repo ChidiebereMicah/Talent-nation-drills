@@ -1,3 +1,8 @@
+"""
+Implementing the same logic using map, comprehension and loop
+and then comparing run time of the different methods
+"""
+
 import random
 import timeit
 TAX_RATE = .08
@@ -19,7 +24,7 @@ def get_prices_with_loop():
         return prices
 
 
-print(timeit.timeit(get_prices_with_map, number=100))
+print(timeit.timeit(get_prices_with_map, number=100)) #checking run time
 #2.0554370979998566
 
 print(timeit.timeit(get_prices_with_comprehension, number=100))

@@ -15,7 +15,7 @@ class Temperature:
 
 
     def __init__(self, celsius):
-        self._celsius = celsius
+        self.celsius = celsius
 
     @property
     def celsius(self):
@@ -26,7 +26,7 @@ class Temperature:
         if temperature < -273.15:
             raise ValueError("Temp cannot be less than -273.15")
 
-        self._celsius = temperature
+        self._celsius = temperature 
 
     @property
     def fahrenheit(self):

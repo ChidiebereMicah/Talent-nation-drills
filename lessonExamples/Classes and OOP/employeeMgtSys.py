@@ -19,7 +19,7 @@ class Employee():
 
     @property
     def annual_salary(self):
-        return self._salary * 12
+        return self.salary * 12
 
     def give_raise(self, amount):
         self.salary += amount
@@ -73,3 +73,6 @@ c = Employee.from_string("James,20000,Web")
 print(c.name)
 print(c.salary)
 print(c.department)
+
+value = ""
+print()

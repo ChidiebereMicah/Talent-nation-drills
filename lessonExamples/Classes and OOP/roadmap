@@ -1,0 +1,15 @@
+1. Class vs instance
+2. self and attribute lookup
+3. __init__ and instance state
+4. Instance methods
+5. Class attributes
+6. Instance vs class methods
+7. Encapsulation and properties
+8. Inheritance
+9. Method overriding
+10. super()
+11. Polymorphism
+12. Special methods (__str__, __repr__, __eq__, etc.)
+13. Composition vs inheritance
+14. Dataclasses
+15. How Python's object model actually works

@@ -13,3 +13,14 @@
 13. Composition vs inheritance
 14. Dataclasses
 15. How Python's object model actually works
+
+Should Manager inherit from Employee?
+Should Car contain an Engine?
+Should a DataScientist inherit from Employee?
+Should a Logger inherit from something, or should it be injected into another class?
+
+deep inheritance hierarchies
+fragile parent-child dependencies
+multiple inheritance
+composition + dependency injection
+favoring composition over inheritance

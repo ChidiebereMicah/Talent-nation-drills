@@ -11,12 +11,15 @@ class Book:
         return f"Book(title='{self.title}', author='{self.author}', pages={self.pages})"
 
     def __len__(self):
-        return {self.pages}
+        return self.pages
 
     def __eq__(self, other):
-        if not isinstance(other, Book) and isinstance(other, tuple):
+        if isinstance(other, tuple):
             other = Book(*other)
-        return self.pages == other.pages and self.author == other.author and self.title == other.title
+        if isinstance(other, Book):
+            return self.pages == other.pages and self.author == other.author and self.title == other.title
+        if not isinstance(other, Book):
+            return NotImplemented
 
 book1 = Book("Python Mastery", "Micah", 450)
 book2 = Book("Python Mastery", "Micah", 450)

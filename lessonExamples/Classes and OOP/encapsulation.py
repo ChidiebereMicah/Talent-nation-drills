@@ -21,6 +21,7 @@ class Temperature:
     def celsius(self):
         return self._celsius
 
+    #the setter method here defines how celcuis can be changed
     @celsius.setter
     def celsius(self, temperature):
         if temperature < -273.15:
@@ -37,6 +38,6 @@ temp = Temperature(25)
 print(temp.celsius)      # 25
 print(temp.fahrenheit)   # 77.0
 
-temp.celsius = 30
+temp.celsius = -40000
 
 print(temp.fahrenheit) 

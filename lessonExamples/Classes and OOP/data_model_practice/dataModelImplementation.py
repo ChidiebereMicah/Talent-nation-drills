@@ -15,7 +15,15 @@ samples = [
 """
 
 iris = load_iris()
-print(iris)
+# print(iris)
+# print(type(iris))
+# print(type(iris["data"]))
+# print(iris["data"].shape)
+# print(iris["data"][0])
+
+print(iris["feature_names"])
+print(iris["target"][0])
+print(iris["target_names"])
 training_samples = [
     
 ]

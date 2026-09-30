@@ -42,9 +42,9 @@ def make_flower(iris, index):
     flower['species'] = str(iris['target_names'][iris['target'][index]])
     return flower
 
-print(flower_0 := make_flower(iris, 0))
-print(flower_50 := make_flower(iris, 50))
-print(flower_100 := make_flower(iris, 100))
+# print(flower_0 := make_flower(iris, 0))
+# print(flower_50 := make_flower(iris, 50))
+# print(flower_100 := make_flower(iris, 100))
 
 #Building the full dataset from iris
 samples = [make_flower(iris, index) for index in range(len(iris['data']))]
@@ -60,5 +60,43 @@ class Dataset:
     def __init__(self, samples):
         self.samples = samples
 
-    def __len__(self, samples):
+    def __len__(self):
+        return len(self.samples)
 
+    """
+    B. Indexing
+    This should work:
+
+    dataset[0]
+    dataset[1]
+    dataset[-1]
+    """
+    
+    def __getitem__(self, start_index, stop_index = None):
+        if start_index and stop_index:
+            return self.samples[start_index:stop_index]
+        else:
+            return self.samples[start_index]
+
+    def __iter__(self):
+        for sample in self.samples:
+            yield sample
+
+    def __contains__(self, item):
+        return item in self.samples
+
+    def __str__(self):
+        return f"Dataset(samples = {len(self.samples)})"
+
+    def __repr__(self):
+        return f"Dataset(samples[dict, dict,...] = {len(self.samples)}, {len(self.samples[0])})"
+           
+    def __eq__(self, value):
+        pass
+dataset = Dataset(samples)
+
+print(len(dataset))
+print(dataset[0])
+print(dataset[-1])
+print(dataset == Dataset(samples))
+print(samples[0] in dataset)

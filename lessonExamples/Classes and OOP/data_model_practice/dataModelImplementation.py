@@ -159,3 +159,12 @@ print("--------------------------------------\n---------------------------------
 print(summarize_dataset(dataset))
 
 print(dataset[0:10])
+
+print(dataset[::-1][0])
+print(type(iter(dataset)))
+
+iterator = iter(dataset)
+print(next(iterator)) #prints 1st dict in samples
+print(next(iterator)) #prints 2nd dict in samples
+
+print(dataset == 42)

@@ -23,7 +23,7 @@ Requirement 1 — users
 Create a list comprehension containing the names of all users 
 whose category list contains "python".
 Expected:
-["Ada", "James", "Micah", "Sarah", "David"]
+["Ada", "James", "Mathias", "Divine", "David"]
 Do not manually build this list with .append().
 
 Requirement 2 — unique_categories
@@ -73,8 +73,8 @@ For example:
 {
     "Ada": 3,
     "James": 3,
-    "Micah": 3,
-    "Sarah": 4,
+    "Mathias": 3,
+    "Divine": 4,
     "David": 3
 }
 Notice that Ada has four entries but 
@@ -93,8 +93,8 @@ For the given data:
 {
     "Ada": "Focused",
     "James": "Focused",
-    "Micah": "Focused",
-    "Sarah": "Broad",
+    "Mathias": "Focused",
+    "Divine": "Broad",
     "David": "Focused"
 }
 This is specifically intended to make you use the 
@@ -130,11 +130,11 @@ records = [
         "categories": ["python", "web", "javascript"]
     },
     {
-        "name": "Micah",
+        "name": "Mathias",
         "categories": ["ai", "python", "data", "ai"]
     },
     {
-        "name": "Sarah",
+        "name": "Divine",
         "categories": ["math", "data", "python", "ml"]
     },
     {

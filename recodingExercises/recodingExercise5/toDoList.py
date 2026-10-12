@@ -2,7 +2,7 @@ def to_do_list():
     to_do = []
     action = ""
     while action != "1":
-        action = int(input("What would you like to do:\n"
+        action = (input("What would you like to do:\n"
         "   to add task press 'a'\n"
         "   to view tasks press 'v'\n"
         "   to remove tasks press 'r'\n"
@@ -11,20 +11,19 @@ def to_do_list():
             add_task(to_do)
         elif action.lower() == 'v':
             view_task(to_do)
-        elif action.lower() == 'n':
+        elif action.lower() == 'r':
             remove_task(to_do)
         elif action != '1':
             print("\nInput a valid option\n")
-        funcs[action-1](to_do)
 
-    funcs=[add_task,view_task,remove_task]
-    while action != "1":
-        action = int(input("What would you like to do:\n"
-        "   to add task press '1'\n"
-        "   to view tasks press '2'\n"
-        "   to remove tasks press '3'\n"
-        "   to quit press '0': "))
-        funcs[action-1](to_do)
+    # funcs=[add_task, view_task, remove_task]
+    # while action != "0":
+    #     action = int(input("What would you like to do:\n"
+    #     "   to add task press '1'\n"
+    #     "   to view tasks press '2'\n"
+    #     "   to remove tasks press '3'\n"
+    #     "   to quit press '0': "))
+    #     funcs[action-1](to_do)
 
 
 def add_task(to_do):
@@ -52,4 +51,4 @@ def remove_task(to_do):
     print("Task removed...\n")
 
 to_do_list()
-print("Thanks for using this service")
+print("\nThanks for using this service\n")

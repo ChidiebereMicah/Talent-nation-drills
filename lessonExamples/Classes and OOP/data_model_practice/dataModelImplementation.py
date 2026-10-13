@@ -55,9 +55,40 @@ A. Length
 This should work:
 len(dataset)
 """
+
+from copy import deepcopy
+
 class Dataset:
     def __init__(self, samples):
-        self._samples = list(samples)
+        self.samples = samples
+        self.new_schema = (key for key in self.samples)
+
+    @property
+    def samples(self):
+        return tuple(deepcopy(self._samples))
+
+    @samples.setter
+    def samples(self, value):
+        try:
+            self._validate_sample(value)
+            self._samples = value
+            self.schema = self.new_schema #ensuring schema check for next sample modification
+        except TypeError:
+            print(f"Sample type does not match")
+        except ValueError:
+            print(f"Sample schema does not match")
+
+    def _validate_sample(self, sample):
+        if not isinstance(sample, dict):
+            raise TypeError("Sample type must be dictionary")
+        if self.new_schema != self.schema:
+            raise ValueError("Sample schema is not identical")
+        return True
+
+    def add_sample(self, sample):
+        
+
+        
 
     def __len__(self):
         return len(self._samples)

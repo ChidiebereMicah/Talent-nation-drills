@@ -60,35 +60,53 @@ from copy import deepcopy
 
 class Dataset:
     def __init__(self, samples):
-        self.samples = samples
-        self.new_schema = (key for key in self.samples)
-
+        self.samples = samples        
+        
     @property
     def samples(self):
         return tuple(deepcopy(self._samples))
 
     @samples.setter
     def samples(self, value):
+        #ensuring all dicts in the dataset have identical key sets
+        if not (all(len(sample) == len(value[0]) for sample in value) and all(key == key_check for item in value for key, key_check in zip(item, value[0]))):
+            raise ValueError("Dataset schema is not accurate")
+        self._samples = value
+
+    def _validate_sample(self, sample):
+        #ensuring sample is a dict and sample key set is identical with key set in samples already in the dataset
+        if not isinstance(sample, dict):
+            raise TypeError("Sample type must be dictionary")
+        if not self.samples:
+            return True
+        elif len(sample) != len(self.samples[0]) or any(key != key_check for key, key_check in zip(sample, self.samples[0])):
+            raise ValueError("Sample schema is not identical")
+        else:
+            return True
+
+    def add_sample(self, sample):
         try:
-            self._validate_sample(value)
-            self._samples = value
-            self.schema = self.new_schema #ensuring schema check for next sample modification
+            if self._validate_sample(sample):
+                self._samples.append(sample)
         except TypeError:
             print(f"Sample type does not match")
         except ValueError:
             print(f"Sample schema does not match")
 
-    def _validate_sample(self, sample):
-        if not isinstance(sample, dict):
-            raise TypeError("Sample type must be dictionary")
-        if self.new_schema != self.schema:
-            raise ValueError("Sample schema is not identical")
-        return True
+    def replace_sample(self, index, sample):
+        try:
+            if self._validate_sample(sample):
+                self._samples[index] = sample
+        except TypeError:
+            print(f"Sample type does not match")
+        except ValueError:
+            print(f"Sample schema does not match")
 
-    def add_sample(self, sample):
-        
-
-        
+    def remove_sample(self, index):
+        if not self.samples:
+            print("Dataset is empty")
+        else:
+            self._samples.pop(index)
 
     def __len__(self):
         return len(self._samples)
@@ -199,3 +217,6 @@ print(next(iterator)) #prints 1st dict in samples
 print(next(iterator)) #prints 2nd dict in samples
 
 print(dataset == 42)
+
+
+print("--------------------------------------\n--------------------------------------")

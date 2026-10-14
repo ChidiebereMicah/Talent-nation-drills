@@ -74,11 +74,12 @@ class Dataset:
         self._samples = value
 
     def _validate_sample(self, sample):
-        #ensuring sample is a dict and sample key set is identical with key set in samples already in the dataset
+        #ensuring sample is a dict
         if not isinstance(sample, dict):
             raise TypeError("Sample type must be dictionary")
         if not self.samples:
             return True
+        #ensuring that sample key set is identical with key set in samples already in the dataset
         elif len(sample) != len(self.samples[0]) or any(key != key_check for key, key_check in zip(sample, self.samples[0])):
             raise ValueError("Sample schema is not identical")
         else:
@@ -88,6 +89,7 @@ class Dataset:
         try:
             if self._validate_sample(sample):
                 self._samples.append(sample)
+                print("Sample added successfully")
         except TypeError:
             print(f"Sample type does not match")
         except ValueError:
@@ -107,6 +109,7 @@ class Dataset:
             print("Dataset is empty")
         else:
             self._samples.pop(index)
+            print("sample removed successfully")
 
     def __len__(self):
         return len(self._samples)
@@ -120,7 +123,7 @@ class Dataset:
     dataset[-1]
     """
     def __getitem__(self, key):
-        return self._samples[key]
+        return deepcopy(self._samples[key])
 
     """
     C. Iteration
@@ -132,7 +135,7 @@ class Dataset:
     """
     def __iter__(self):
         for sample in self._samples:
-            yield sample
+            yield deepcopy(sample)
 
     """
     D. Membership
@@ -196,27 +199,49 @@ dataset = Dataset(samples)
 dataset1 = Dataset(samples)
 dataset2 = Dataset(samples)
 
-print(len(dataset))
-print(dataset[0])
-print(dataset[-1])
-print(dataset == Dataset(samples))
-print(dataset1 == dataset2)
-print(samples[0] in dataset)
-print(dataset)
+# print(len(dataset))
+# print(dataset[0])
+# print(dataset[-1])
+# print(dataset == Dataset(samples))
+# print(dataset1 == dataset2)
+# print(samples[0] in dataset)
+# print(dataset)
 
-print("--------------------------------------\n--------------------------------------")
-print(summarize_dataset(dataset))
+# print("--------------------------------------\n--------------------------------------")
+# print(summarize_dataset(dataset))
 
-print(dataset[0:10])
+# print(dataset[0:10])
 
-print(dataset[::-1][0])
-print(type(iter(dataset)))
+# print(dataset[::-1][0])
+# print(type(iter(dataset)))
 
-iterator = iter(dataset)
-print(next(iterator)) #prints 1st dict in samples
-print(next(iterator)) #prints 2nd dict in samples
+# iterator = iter(dataset)
+# print(next(iterator)) #prints 1st dict in samples
+# print(next(iterator)) #prints 2nd dict in samples
 
-print(dataset == 42)
+# print(dataset == 42)
 
 
-print("--------------------------------------\n--------------------------------------")
+# print("--------------------------------------\n--------------------------------------")
+
+
+dataset.replace_sample(0, {"species": "setosa"})
+
+# Valid addition
+dataset.add_sample({'sepal_length': 5.1, 'sepal_width': 3.5, 'petal_length': 1.4, 'petal_width': 0.2, 'species': 'setosa'})
+
+# Invalid type
+dataset.add_sample("not a dictionary")
+
+# Invalid schema
+dataset.add_sample({"species": "setosa"})
+
+# Mutation of a retrieved sample
+retrieved = dataset[0]
+retrieved["species"] = "invalid species"
+print(f"\n{retrieved}\n")
+
+# Invalid whole-dataset replacement
+dataset.samples = {'sepal_length': 5.1, 'sepal_width': 3.5, 'petal_length': 1.4, 'petal_width': 0.2}
+
+# {'sepal_length': 5.1, 'sepal_width': 3.5, 'petal_length': 1.4, 'petal_width': 0.2, 'species': 'setosa'}

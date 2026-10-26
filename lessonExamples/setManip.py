@@ -26,6 +26,7 @@ print(A|B)
 print(A & B)
 print(A)
 print(B)
+print(B)
 
 A.update(B) #modifies A to become the union of A and B
 print(A)

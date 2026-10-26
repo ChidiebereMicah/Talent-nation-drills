@@ -11,5 +11,10 @@ def remv_sps_cap_word(words):
            f"No Spaces: {no_space}"
            )
 
+    for i in range(len(words)):
+        capitalized = ""
+        if not i and 'a' < words[i] < 'z':
+            capitalized +=
+
 
 print(remv_sps_cap_word("hello world from python"))

@@ -245,3 +245,127 @@ print(f"\n{retrieved}\n")
 dataset.samples = {'sepal_length': 5.1, 'sepal_width': 3.5, 'petal_length': 1.4, 'petal_width': 0.2}
 
 # {'sepal_length': 5.1, 'sepal_width': 3.5, 'petal_length': 1.4, 'petal_width': 0.2, 'species': 'setosa'}
+
+
+from collections.abc import Mapping
+from copy import deepcopy
+
+
+class Dataset:
+    def __init__(self, samples=()):
+        self._samples = []
+        self._schema = None
+
+        # Uses the same validation rules as later replacements.
+        self.samples = samples
+
+    @property
+    def samples(self):
+        # Return a snapshot, not references to internal dictionaries.
+        return tuple(deepcopy(self._samples))
+
+    @samples.setter
+    def samples(self, values):
+        # A single dictionary is one sample, not a collection of samples.
+        if isinstance(values, (Mapping, str, bytes)):
+            raise TypeError(
+                "samples must be an iterable of sample dictionaries"
+            )
+
+        try:
+            incoming = list(values)
+        except TypeError as error:
+            raise TypeError(
+                "samples must be an iterable of sample dictionaries"
+            ) from error
+
+        # Validate and prepare everything before changing the dataset.
+        candidate = []
+        expected_schema = self._schema
+
+        for sample in incoming:
+            stored_sample, actual_schema = self._validate_sample(
+                sample, expected_schema
+            )
+
+            if expected_schema is None:
+                expected_schema = actual_schema
+
+            candidate.append(stored_sample)
+
+        # Commit only after all samples have passed validation.
+        self._samples = candidate
+        self._schema = expected_schema
+
+    def _validate_sample(self, sample, expected_schema):
+        if not isinstance(sample, dict):
+            raise TypeError("Each sample must be a dictionary")
+
+        actual_schema = frozenset(sample.keys())
+
+        if (
+            expected_schema is not None
+            and actual_schema != expected_schema
+        ):
+            raise ValueError(
+                "Sample keys must match the dataset schema"
+            )
+
+        # Store a copy so the caller cannot mutate our stored sample.
+        return deepcopy(sample), actual_schema
+
+    def add_sample(self, sample):
+        stored_sample, actual_schema = self._validate_sample(
+            sample, self._schema
+        )
+
+        self._samples.append(stored_sample)
+
+        # The first successful sample establishes the schema.
+        if self._schema is None:
+            self._schema = actual_schema
+
+    def replace_sample(self, index, sample):
+        stored_sample, actual_schema = self._validate_sample(
+            sample, self._schema
+        )
+
+        # If the index is invalid, list assignment raises IndexError.
+        # The schema is updated only after successful assignment.
+        self._samples[index] = stored_sample
+
+        if self._schema is None:
+            self._schema = actual_schema
+
+    def remove_sample(self, index):
+        # Make a copy before removal so the returned value is detached.
+        removed_sample = deepcopy(self._samples[index])
+        del self._samples[index]
+
+        return removed_sample
+
+    def __len__(self):
+        return len(self._samples)
+
+    def __getitem__(self, key):
+        # Handles integer indices and slices.
+        return deepcopy(self._samples[key])
+
+    def __iter__(self):
+        for sample in self._samples:
+            yield deepcopy(sample)
+
+    def __contains__(self, item):
+        return item in self._samples
+
+    def __str__(self):
+        return f"Dataset(samples={len(self)})"
+
+    def __repr__(self):
+        return f"Dataset(n_samples={len(self)})"
+
+    def __eq__(self, other):
+        if not isinstance(other, Dataset):
+            return NotImplemented
+
+        return self._samples == other._samples

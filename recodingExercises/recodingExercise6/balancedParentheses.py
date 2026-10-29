@@ -27,18 +27,27 @@ def balanced_parens(text):
     unbalanced = []
 
     for ch in text:
-        if ch not in enclosures.items():
-            continue
         if ch in enclosures:
             unbalanced.append(enclosures[ch])
-        elif ch == unbalanced[-1]:
-            unbalanced.pop()
         elif ch in enclosures.values():
-            return "Not balanced"
+            if not unbalanced:
+                return "Not balanced"
+            elif ch == unbalanced[-1]:
+                unbalanced.pop()
+            else:
+                return "Not balanced"
+            
+    if unbalanced:
+        return "Not balanced"
+    return "Balanced"
 
-    if not unbalanced:
-        return "Balanced"
-    return "Not balanced"
-
-print(balanced_parens("((a + b)"))
-print(balanced_parens("[(a + b) * {c - d}]"))
+print(balanced_parens("((a + b)"))             # Not balanced
+print(balanced_parens("[(a + b) * {c - d}]"))  # Balanced
+print(balanced_parens("()"))                   # Balanced
+print(balanced_parens("([{}])"))               # Balanced
+print(balanced_parens("(a + b)"))              # Balanced
+print(balanced_parens("(a + b)]"))             # Not balanced
+print(balanced_parens("([)]"))                 # Not balanced
+print(balanced_parens("((a + b)"))             # Not balanced
+print(balanced_parens(")"))                    # Not balanced
+print(balanced_parens("abc"))                  # Balanced

@@ -21,19 +21,32 @@ What this gauges: Can you shrink the problem each step instead of scanning every
 
 """
 
+# def binary_search(nums, target):
+#     index = 0
+#     comparisons = 0
+#     while index < len(nums):
+#         comparisons += 1
+#         if nums[index] == target:
+#             return nums, target, index, comparisons
+#         index += 1
+#     index = -1
+#     return nums, target, index, comparisons
+
+# nums = [1, 3, 3, 3, 5, 8]
+# # nums = [1, 3, 5, 8]
+# # nums = []
+# nums, target, index, comparisons = binary_search(nums, 8)
+# print(f"nums = {nums}, target = {target}  → ({index}, {comparisons})")
+
 def binary_search(nums, target):
-    index = 0
-    comparisons = 0
-    while index < len(nums):
-        comparisons += 1
-        if nums[index] == target:
-            return nums, target, index, comparisons
-        index += 1
-    index = -1
-    return nums, target, index, comparisons
+    point = nums[len(nums)//2]
+    while point != target:
+        if point < target:
+            nums = nums[::len(nums)//2]
+        else:
+            nums = nums[len(nums)//2::]
+        point = nums[len(nums)//2]
+    return len(nums)//2
 
 nums = [1, 3, 3, 3, 5, 8]
-# nums = [1, 3, 5, 8]
-# nums = []
-nums, target, index, comparisons = binary_search(nums, 8)
-print(f"nums = {nums}, target = {target}  → ({index}, {comparisons})")
+print(binary_search(nums, 1))

@@ -22,14 +22,10 @@ Optional Stretch: Print the next 3 leap years after the input year using a loop.
 def leap_year_checker(year):
     if year < 1:
         return "Please enter a positive year."
-    if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
-        return True
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
 
-    return False
-
-check = input("Do you want to check a leap year?\nPress Y to check, any key to exit: ")
 check_count = 1
-while check.lower() == 'y':
+while input("Do you want to check a leap year?\nPress Y to check, any key to exit: ").lower() == 'y':
     print(f'===== Check {check_count} =====')
     try:
         year = int(input("Please enter year to check leapyearness: "))
@@ -58,6 +54,5 @@ while check.lower() == 'y':
             candidate += 1
 
     check_count += 1
-    check = input("\nDo you want to check a leap year?\nPress Y to check, any key to exit: ")
 
 print('\nThanks for using this service.')

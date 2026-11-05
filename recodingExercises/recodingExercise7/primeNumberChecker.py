@@ -1,5 +1,5 @@
 """
-Prime Number Checker — Optimized
+1. Prime Number Checker — Optimized
 Suggested time: 12–15 minutes
 Problem
 Given an integer N, determine if it is a prime number. Then, print the sum of all prime numbers from 2 up to N.

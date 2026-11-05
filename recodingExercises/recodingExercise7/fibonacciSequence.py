@@ -1,5 +1,5 @@
 """
-Fibonacci Sequence — Even Sum
+2. Fibonacci Sequence — Even Sum
 Suggested time: 15–20 minutes
 Problem
 Print the first N numbers of the Fibonacci sequence. Calculate the sum of only the even numbers in that sequence. Finally, print the sequence in reverse order.

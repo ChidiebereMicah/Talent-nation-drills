@@ -28,7 +28,7 @@ def remv_sps_cap_word(words):
     cap_list = []
     for word in words_list:
         cap_word = word
-        if 'a' < word[0] < 'z':
+        if 'a' <= word[0] <= 'z':
             cap_word = chr(ord(word[0]) - 32) + word[1::]
         cap_list.append(cap_word)
     capitalized = " ".join(cap_list)
@@ -37,10 +37,27 @@ def remv_sps_cap_word(words):
            f"No Spaces: {no_space}"
            )
 
+def remv_sps_cap_word(words):
+    capitalized = []
+    at_first_ch = True
+    for ch in words:
+        if ch == " ":
+            capitalized.append(ch)
+            at_first_ch = True
+            continue
+
+        if at_first_ch and 'a' <= ch <= 'z':
+            capitalized.append(chr(ord(ch)-32))
+        else:
+            capitalized.append(ch)
+        at_first_ch = False
+
+    return(f"Capitalized: {''.join(capitalized)}\n"
+            f"No Spaces: {''.join(ch for ch in capitalized if ch != ' ')}"
+    )
+
+
 print(remv_sps_cap_word("hello world from python"))
 print(remv_sps_cap_word(" "))
 
-    # for i in range(len(words)):
-    #     capitalized = ""
-    #     if not i and 'a' < words[i] < 'z':
-    #         capitalized += 
+

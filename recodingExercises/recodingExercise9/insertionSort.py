@@ -28,13 +28,13 @@ def insertion_sort(nums):
         key = nums[i]
         key_idx = i
         mover_idx = i - 1
-        while key_idx > 0:
-            comparisons += 1
-            if nums[mover_idx] > key:
-                nums[key_idx] = nums[mover_idx]
+        while key_idx > 0 and nums[mover_idx] > key:
+            nums[key_idx] = nums[mover_idx]
             mover_idx -= 1
             key_idx -= 1
             shifts += 1
+        comparisons += 1
+
         nums[key_idx] = key
 
     return nums, comparisons, shifts

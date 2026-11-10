@@ -22,6 +22,7 @@ What this gauges: Can you shift items to open a gap and insert into it? Can you 
 """
 
 def insertion_sort(nums):
+    static_nums = nums.copy()
     comparisons = 0
     shifts = 0
     for i in range(1, len(nums)):
@@ -29,21 +30,24 @@ def insertion_sort(nums):
         key_idx = i
         mover_idx = i - 1
         while key_idx > 0 and nums[mover_idx] > key:
+            comparisons += 1
             nums[key_idx] = nums[mover_idx]
             mover_idx -= 1
             key_idx -= 1
             shifts += 1
-        comparisons += 1
+            
+        if key_idx > 0:
+            comparisons += 1
 
         nums[key_idx] = key
 
-    return nums, comparisons, shifts
+    return static_nums, nums, comparisons, shifts
 
 nums1 = [5, 2, 4, 1]
 nums2 = [1, 2, 3, 4]
 nums3 = [4, 3, 2, 1] 
 nums4 = []
-nums, comparisons, shifts = insertion_sort(nums1)
-print(f"{nums1}  -> sorted {nums}, returns ({comparisons}, {shifts})")
+static_nums, nums, comparisons, shifts = insertion_sort(nums3)
+print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
             
 

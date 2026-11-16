@@ -47,7 +47,13 @@ nums1 = [5, 2, 4, 1]
 nums2 = [1, 2, 3, 4]
 nums3 = [4, 3, 2, 1] 
 nums4 = []
-static_nums, nums, comparisons, shifts = insertion_sort(nums3)
+nums5 = [1,2,3,4,5,6,7,8,9,10]
+nums6 = reversed(nums5)
+
+static_nums, nums, comparisons, shifts = insertion_sort(nums5)
+print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
+
+static_nums, nums, comparisons, shifts = insertion_sort(nums6)
 print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
             
 

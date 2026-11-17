@@ -47,13 +47,32 @@ nums1 = [5, 2, 4, 1]
 nums2 = [1, 2, 3, 4]
 nums3 = [4, 3, 2, 1] 
 nums4 = []
-nums5 = [1,2,3,4,5,6,7,8,9,10]
-nums6 = reversed(nums5)
+nums5 = [0,1,2,3,4,5,6,7,8,9,10]
+nums6 = list(reversed(nums5))
+nums7 = [x for x in range(21)]
+nums8 = list(reversed(nums7))
 
-static_nums, nums, comparisons, shifts = insertion_sort(nums5)
-print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
+# static_nums, nums, comparisons, shifts = insertion_sort(nums5)
+# print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
 
-static_nums, nums, comparisons, shifts = insertion_sort(nums6)
-print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
-            
+# static_nums, nums, comparisons, shifts = insertion_sort(nums6)
+# print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
+
+# static_nums, nums, comparisons, shifts = insertion_sort(nums7)
+# print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
+
+# static_nums, nums, comparisons, shifts = insertion_sort(nums8)
+# print(f"{static_nums}  -> sorted {nums}, returns ({comparisons}, {shifts})")
+
+
+exper_data = [x for x in range(21)]
+for i in exper_data:
+    nums = [x for x in range(i)]
+    rev_nums = list(reversed(nums))
+    static_nums, nums, comparisons, shifts = insertion_sort(nums)
+    print(f"{i} sorted ({comparisons}, {shifts})")
+    static_nums, nums, comparisons, shifts = insertion_sort(rev_nums)
+    print(f"{i} reversed ({comparisons}, {shifts})")
+    print()
+    
 

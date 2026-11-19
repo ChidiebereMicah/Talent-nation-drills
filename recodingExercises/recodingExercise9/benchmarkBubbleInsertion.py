@@ -139,20 +139,19 @@ for n in sizes:
     # )
 
     print(
-        f"{n:<8}"
-        f"{insertion_time_sorted:<18.6f}"
-        f"{insertion_time_reversed:<18.6f}"
-        f"{insertion_time_nearly_sorted:<18.6f}"
-        f"{insertion_ratio_sorted:<10.2f}"
-        f"{insertion_ratio_reversed:<10.2f}"
-        f"{insertion_ratio_nearly_sorted:<10.2f}"
-        f"{bubble_time_sorted:<18.6f}"
-        f"{bubble_time_reversed:<18.6f}"
-        f"{bubble_time_nearly_sorted:<18.6f}"
-        f"{bubble_ratio_sorted:<10.2f}"
-        f"{bubble_ratio_reversed:<10.2f}"
-        f"{bubble_ratio_nearly_sorted:<10.2f}"
-
+    f"{n:<8}"
+    f"{insertion_time_sorted:<18.6f}"
+    f"{insertion_ratio_sorted:<10.2f}"
+    f"{insertion_time_reversed:<18.6f}"
+    f"{insertion_ratio_reversed:<10.2f}"
+    f"{insertion_time_nearly_sorted:<22.6f}"
+    f"{insertion_ratio_nearly_sorted:<10.2f}"
+    f"{bubble_time_sorted:<18.6f}"
+    f"{bubble_ratio_sorted:<10.2f}"
+    f"{bubble_time_reversed:<18.6f}"
+    f"{bubble_ratio_reversed:<10.2f}"
+    f"{bubble_time_nearly_sorted:<22.6f}"
+    f"{bubble_ratio_nearly_sorted:<10.2f}"
     )
 
     prev_insertion_sorted = insertion_time_sorted

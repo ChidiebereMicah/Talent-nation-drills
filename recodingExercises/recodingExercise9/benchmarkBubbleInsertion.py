@@ -41,13 +41,19 @@ def bubble_sort(nums):
 
     return comparisons, swaps
 
-
 def benchmark(sort_function, nums, repetitions=5):
-    def run():
-        data = nums.copy()
-        sort_function(data)
+    times = []
 
-    return min(timeit.repeat(run, repeat=repetitions, number=1))
+    for _ in range(repetitions):
+        data = nums.copy()
+
+        start = timeit.default_timer()
+        sort_function(data)
+        elapsed = timeit.default_timer() - start
+
+        times.append(elapsed)
+
+    return min(times)
 
 
 sizes = [100, 200, 400, 800, 1600, 3200, 6400, 12800]

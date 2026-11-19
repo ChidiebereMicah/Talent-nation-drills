@@ -25,17 +25,33 @@ def bubble_sort(nums):
     for i in range(len(nums)):
         arranged = True
         for j in range(i+1,len(nums)):
-            if j < len(nums):
-                comparisons += 1
-                if nums[i] > nums[j]:
-                    nums[i], nums[j] = nums[j], nums[i]
-                    swaps += 1
-                if j < len(nums) - 1 and nums[j] > nums[j+1]:
-                    arranged = False
+            comparisons += 1
+            if nums[i] > nums[j]:
+                nums[i], nums[j] = nums[j], nums[i]
+                swaps += 1
+            if j < len(nums) - 1 and nums[j] > nums[j+1]:
+                arranged = False
         if arranged:
-            return nums, comparisons
+            return nums, comparisons, swaps
                     
-    return nums, comparisons
+    return nums, comparisons, swaps
+
+def bubble_sort(nums):
+    comparisons = 0
+    swaps = 0
+    for i in range(len(nums)):
+        swapped = False
+        for j in range(len(nums) - 1 - i):
+            comparisons += 1
+            if nums[j] > nums[j+1]:
+                nums[j], nums[j+1] = nums[j+1], nums[j]
+                swaps += 1
+                swapped = True
+        if not swapped:
+            return nums, comparisons, swaps
+
+    return nums, comparisons, swaps
+
 
 nums1 = [5, 1, 4, 2, 8]
 nums2 = [1, 2, 3, 4, 5]
@@ -43,17 +59,17 @@ nums3 = [4,1,2,6,7,8,9]
 nums4 = []
 nums5 = [3,5,1,7,3,8,2,9,4]
 
-nums, comparisons = bubble_sort(nums1)
-print(f"sorted {nums} with {comparisons}")
+nums, comparisons, swaps = bubble_sort(nums1)
+print(f"sorted {nums} with {comparisons} comparisons and {swaps} swaps")
 print()
-nums, comparisons = bubble_sort(nums2)
-print(f"sorted {nums} with {comparisons}")
+nums, comparisons, swaps = bubble_sort(nums2)
+print(f"sorted {nums} with {comparisons} comparisons and {swaps} swaps")
 print()
-nums, comparisons = bubble_sort(nums3)
-print(f"sorted {nums} with {comparisons}")
+nums, comparisons, swaps = bubble_sort(nums3)
+print(f"sorted {nums} with {comparisons} comparisons and {swaps} swaps")
 print()
-nums, comparisons = bubble_sort(nums4)
-print(f"sorted {nums} with {comparisons}")
+nums, comparisons, swaps = bubble_sort(nums4)
+print(f"sorted {nums} with {comparisons} comparisons and {swaps} swaps")
 print()
-nums, comparisons = bubble_sort(nums5)
-print(f"sorted {nums} with {comparisons}")
+nums, comparisons, swaps = bubble_sort(nums5)
+print(f"sorted {nums} with {comparisons} comparisons and {swaps} swaps")

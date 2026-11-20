@@ -56,7 +56,7 @@ def benchmark(sort_function, nums, repetitions=5):
     return min(times)
 
 
-sizes = [100, 200, 400, 800, 1600, 3200, 6400, 12800]
+sizes = [100, 200, 400, 800, 1600, 3200, 6400]
 
 prev_insertion_sorted = None
 prev_insertion_reversed = None
@@ -131,12 +131,6 @@ for n in sizes:
         if prev_bubble_nearly_sorted is not None and prev_bubble_nearly_sorted > 0
         else 0
     )
-
-    # bubble_ratio = (
-    #     bubble_time / previous_bubble
-    #     if previous_bubble is not None and previous_bubble > 0
-    #     else 0
-    # )
 
     print(
     f"{n:<8}"

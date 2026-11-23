@@ -1,0 +1,16 @@
+# Python virtual environments
+tkinter_venv/
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+
+# IDE settings (optional)
+.vscode/

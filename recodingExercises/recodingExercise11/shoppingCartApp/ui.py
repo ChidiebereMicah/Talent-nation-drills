@@ -32,7 +32,7 @@ def on_view_cart():
     except ValueError:
         messagebox.showerror("Invalid input", "Please enter correct cart name")
         return
-    result_label.config(text = f"Cart status: {sh.add_item(cart, name, price, qty)} has been added to your cart")
+    result_label.config(text = f"Cart status: {sh.add_item(cart)} has been added to your cart")
 
 
 def on_clear():
